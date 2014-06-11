@@ -26,7 +26,7 @@ import java.io.IOException;
  *
  * @see SystemUiHider
  */
-public class ServerInfo extends Activity implements ServerRequest {
+public class SmsServer extends Activity implements ServerRequest {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
