@@ -12,6 +12,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -219,10 +220,7 @@ public class SmsServer extends Activity implements ServerRequest {
         try {
             server = new WebServer(PORT, getBaseContext());
             server.start();
-        } catch (IOException e) {
-            // TODO: log to logcat
-            e.printStackTrace();
-        }
+        } catch (IOException e) { Log.e("server", e.getMessage()); }
     }
 
     /**

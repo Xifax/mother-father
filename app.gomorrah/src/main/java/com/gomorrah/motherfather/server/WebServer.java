@@ -12,6 +12,7 @@ import java.util.Map;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import com.gomorrah.motherfather.Info.DeviceInfo;
 import com.gomorrah.motherfather.sms.Sms;
@@ -63,8 +64,7 @@ public class WebServer extends NanoHTTPD
                         sms.put("number", c.getString(c.getColumnIndexOrThrow("address")));
                         sms.put("date", convertSmsDate(c.getLong(c.getColumnIndexOrThrow("date"))));
                     } catch (JSONException e) {
-                        // TODO: logcat!
-                        e.printStackTrace();
+                        Log.e("json", e.getMessage());
                     }
                     smsList.add(sms);
 

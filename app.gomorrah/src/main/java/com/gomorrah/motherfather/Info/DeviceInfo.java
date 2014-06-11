@@ -2,6 +2,7 @@ package com.gomorrah.motherfather.Info;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,8 +64,7 @@ public class DeviceInfo {
             info.put("cpu", cpu);
             info.put("help", help);
         } catch (JSONException e) {
-            // TODO: logcat
-            e.printStackTrace();
+            Log.e("json", e.getMessage());
         }
 
         return info.toString();

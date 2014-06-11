@@ -10,5 +10,4 @@ To build apk either use gradle or import project in Android Studio.
 # TODO:
 
 - Visual request logging [eyecandy]
-- Logcat logging [obligatory!]
 - Settings screen [probably, quite useless]
