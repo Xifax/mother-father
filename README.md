@@ -11,5 +11,4 @@ To build apk either use gradle or import project in Android Studio.
 
 - Visual request logging [eyecandy]
 - Logcat logging [obligatory!]
-- Bugsense integration [could be good]
 - Settings screen [probably, quite useless]

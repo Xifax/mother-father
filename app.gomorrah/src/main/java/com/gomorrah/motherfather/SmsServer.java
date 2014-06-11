@@ -1,8 +1,8 @@
 package com.gomorrah.motherfather;
 
+import com.bugsense.trace.BugSenseHandler;
 import com.gomorrah.motherfather.Info.Network;
 import com.gomorrah.motherfather.events.ServerRequest;
-import com.gomorrah.motherfather.server.NanoHTTPD;
 import com.gomorrah.motherfather.server.WebServer;
 import com.gomorrah.motherfather.util.SystemUiHider;
 
@@ -59,6 +59,9 @@ public class SmsServer extends Activity implements ServerRequest {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // BugSense gonna bugsense
+        BugSenseHandler.initAndStartSession(SmsServer.this, "507ce0f7");
 
         setContentView(R.layout.activity_server_info);
 
