@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Title screen -->
+    <string name="app_name">MotherFather</string>
+    <string name="dummy_button">Refresh</string>
+    <string name="dummy_content">SERVER\nGONNA\nSERVE</string>
+
+    <!-- Notifications -->
+    <string name="no_network">No network access available, duh!</string>
+
+    <!-- Errors -->
+
+</resources>
