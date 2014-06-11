@@ -1,8 +1,15 @@
 Mother-Father
 -------------
 
-Android server-client for sending SMS via HTTP requests.
-Uses NanoHttpd server, included with codebase.
-Contains Android Studio project files.
+Android server-client (hence the name) for sending SMS via HTTP requests.
+Uses NanoHttpd server, included with codebase without additional dependencies.
+Contains Android Studio project files, allowing for quick import in IDE.
 
-To build apk either use gradle or import in Android Studio.
+To build apk either use gradle or import project in Android Studio.
+
+# TODO:
+
+- Visual request logging [eyecandy]
+- Logcat logging [obligatory!]
+- Bugsense integration [could be good]
+- Settings screen [probably, quite useless]
