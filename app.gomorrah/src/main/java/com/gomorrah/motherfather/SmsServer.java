@@ -2,7 +2,7 @@ package com.gomorrah.motherfather;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.gomorrah.motherfather.Info.Network;
-import com.gomorrah.motherfather.events.ServerRequest;
+import com.gomorrah.motherfather.events.RequestProcessed;
 import com.gomorrah.motherfather.server.WebServer;
 import com.gomorrah.motherfather.util.SystemUiHider;
 
@@ -12,6 +12,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,7 +29,7 @@ import java.io.IOException;
  *
  * @see SystemUiHider
  */
-public class SmsServer extends Activity implements ServerRequest {
+public class SmsServer extends Activity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -193,6 +194,25 @@ public class SmsServer extends Activity implements ServerRequest {
     private WebServer server;
     private static final int PORT = 8080;
 
+
+    /* Manage events */
+    private RequestProcessed listener = new RequestProcessed() {
+
+        @Override public void onUpdate(final String update) {
+            new Handler(Looper.getMainLooper()).post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView log = (TextView) findViewById(R.id.log);
+//                        log.setText(log.getText() + "\n" + update);
+                        log.setText(update);
+                        log.setVisibility(View.VISIBLE);
+                    }
+                }
+            );
+        }
+    };
+
     /**
      * Start our little server
      */
@@ -219,6 +239,7 @@ public class SmsServer extends Activity implements ServerRequest {
         // If everything looks good, let's start our server
         try {
             server = new WebServer(PORT, getBaseContext());
+            server.setListener(listener);
             server.start();
         } catch (IOException e) { Log.e("server", e.getMessage()); }
     }
@@ -237,19 +258,13 @@ public class SmsServer extends Activity implements ServerRequest {
         WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
         final String formatedIpAddress = String.format(
-                "%d.%d.%d.%d",
-                (ipAddress & 0xff),
-                (ipAddress >> 8 & 0xff),
-                (ipAddress >> 16 & 0xff),
-                (ipAddress >> 24 & 0xff)
+            "%d.%d.%d.%d",
+            (ipAddress & 0xff),
+            (ipAddress >> 8 & 0xff),
+            (ipAddress >> 16 & 0xff),
+            (ipAddress >> 24 & 0xff)
         );
         textIpaddr.setText(formatedIpAddress + "\n" + PORT);
     }
 
-    /* Manage events */
-    @Override
-    public void onUpdate(String update) {
-        ((TextView)findViewById(R.id.log))
-            .setText(update);
-    }
 }

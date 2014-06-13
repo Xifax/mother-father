@@ -5,9 +5,7 @@
     android:background="#0099cc"
     tools:context=".ServerInfo">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
+    <!-- IP and port status -->
     <TextView android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,19 +14,20 @@
         android:textStyle="bold"
         android:textSize="50sp"
         android:gravity="center"
-        android:text="@string/dummy_content" />
+    />
 
+    <!-- Latest processed request to server -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#33b5e5"
-        android:text="Log"
         android:gravity="center"
-        android:paddingTop="50dp"
+        android:paddingTop="60dp"
         android:id="@+id/log"
         android:visibility="gone"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_gravity="center_horizontal|top"
+    />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->

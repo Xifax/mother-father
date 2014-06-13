@@ -12,9 +12,11 @@ import java.util.Map;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.text.format.Time;
 import android.util.Log;
 
 import com.gomorrah.motherfather.Info.DeviceInfo;
+import com.gomorrah.motherfather.events.RequestProcessed;
 import com.gomorrah.motherfather.sms.Sms;
 
 import org.json.JSONArray;
@@ -24,6 +26,12 @@ import org.json.JSONObject;
 public class WebServer extends NanoHTTPD
 {
     private Context context;
+
+    private RequestProcessed listener;
+
+    public void setListener(RequestProcessed listener){
+        this.listener = listener;
+    }
 
 	public WebServer(int port, Context context) throws IOException {
         super(port);
@@ -35,18 +43,21 @@ public class WebServer extends NanoHTTPD
         Method method = session.getMethod();
         String uri = session.getUri();
 
-//        System.out.println(method + " '" + uri + "' ");
-
         // Update log
-//        ((TextView)((Activity)context).findViewById(R.id.log))
-//            .setText(String.format("%s '%s'", method, uri));
-//        listener.onUpdate(String.format("%s '%s'", method, uri));
+        if(listener != null) {
+            Time today = new Time(Time.getCurrentTimezone());
+            today.setToNow();
+            listener.onUpdate(String.format("[%s] %s '%s'", today.format("%k:%M:%S"), method, uri));
+            // TODO: update some internal log too, to display on separate screen!
+        }
 
         // Server response
         String response = "";
 
         // Show device info
         if(uri.equals("/")) { response = (new DeviceInfo(context)).toJson(); }
+
+        if(uri.equals("/status")) { response = "SMS-GRUNT"; }
 
         // Get SMS list
         if(uri.equals("/sms") && method.equals(Method.GET)) {
